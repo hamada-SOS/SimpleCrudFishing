@@ -1,0 +1,49 @@
+@model List<Boat>
+@{
+    var errorMessage = TempData["Error"] as string;
+}
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">
+        @errorMessage
+    </div>
+}
+<h2 class="text-center mb-5">List of Current Boats</h2>
+
+<div class="row mb-5">
+    <div class="col">
+        <a class="btn btn-primary" asp-controller="Boats" asp-action="Create">Add new Boats</a>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Capacity</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var Boat in Model){
+        <tr>
+            <td>@Boat.BoatID</td>
+            <td>@Boat.Name</td>
+            <td>@Boat.Capacity</td>
+            <td>@Boat.Status</td>
+            @* <td>@Boat.Cratedat.ToString("MM/dd/yyyy")</td> *@
+            <td style="white-space:nowrap">
+                <a class="btn btn-primary btn-sm" asp-controller="Boats" asp-action="Edit"
+                    asp-route-id="@Boat.BoatID">Edit</a>
+                <a class="btn btn-primary btn-sm" asp-controller="Boats" asp-action="Delete"
+                    asp-route-id="@Boat.BoatID" onclick="retrun confirm('are you sure?')">Delete</a>
+            </td>
+
+        </tr>
+        }
+    </tbody>
+</table>
