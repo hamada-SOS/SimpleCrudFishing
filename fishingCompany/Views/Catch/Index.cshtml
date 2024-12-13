@@ -1,0 +1,49 @@
+@model List<Catch>
+@{
+    var errorMessage = TempData["Error"] as string;
+}
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">
+        @errorMessage
+    </div>
+}
+<h2 class="text-center mb-5">List of Catches</h2>
+
+<div class="row mb-5">
+    <div class="col">
+        <a class="btn btn-primary" asp-controller="Catch" asp-action="Create">Add new Catches</a>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Trip ID</th>
+            <th>Fishing Type</th>
+            <th>weight</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var Catch in Model){
+        <tr>
+            <td>@Catch.CatchID</td>
+            <td>@Catch.TripID</td>
+
+            <td>@Catch.FishType</td>
+            <td>@Catch.Weight</td>
+            @* <td>@Boat.Cratedat.ToString("MM/dd/yyyy")</td> *@
+            <td style="white-space:nowrap">
+                <a class="btn btn-primary btn-sm" asp-controller="Catch" asp-action="Edit"
+                    asp-route-id="@Catch.CatchID">Edit</a>
+                <a class="btn btn-primary btn-sm" asp-controller="Catch" asp-action="Delete"
+                    asp-route-id="@Catch.CatchID" onclick="retrun confirm('are you sure?')">Delete</a>
+            </td>
+
+        </tr>
+        }
+    </tbody>
+</table>

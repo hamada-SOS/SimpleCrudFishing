@@ -1,0 +1,52 @@
+
+    
+@model List<FishingTrip>
+@{
+    var errorMessage = TempData["Error"] as string;
+}
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">
+        @errorMessage
+    </div>
+}
+<h2 class="text-center mb-5">List of Fishing Trips</h2>
+
+<div class="row mb-5">
+    <div class="col">
+        <a class="btn btn-primary" asp-controller="FishingTrip" asp-action="Create">Add new trip</a>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Trip ID</th>
+            <th>Trip Date</th>
+            <th>Boats ID</th>
+            <th>Destination</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var fishingTrip in Model){
+        <tr>
+            <td>@fishingTrip.TripID</td>
+            <td>@fishingTrip.TripDate</td>
+            <td>@fishingTrip.BoatID</td>
+            <td>@fishingTrip.Destination</td>
+            <td>@fishingTrip.Status</td>
+            @* <td>@Boat.Cratedat.ToString("MM/dd/yyyy")</td> *@
+            <td style="white-space:nowrap">
+                <a class="btn btn-primary btn-sm" asp-controller="FishingTrip" asp-action="Edit"
+                    asp-route-id="@fishingTrip.TripID">Edit</a>
+                <a class="btn btn-primary btn-sm" asp-controller="FishingTrip" asp-action="Delete"
+                    asp-route-id="@fishingTrip.TripID" onclick="retrun confirm('are you sure?')">Delete</a>
+            </td>
+
+        </tr>
+        }
+    </tbody>
+</table>

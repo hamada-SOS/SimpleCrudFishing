@@ -1,0 +1,48 @@
+
+    @model List<Fisherman>
+@{
+    var errorMessage = TempData["Error"] as string;
+}
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">
+        @errorMessage
+    </div>
+}
+<h2 class="text-center mb-5">List of Fishermen</h2>
+
+<div class="row mb-5">
+    <div class="col">
+        <a class="btn btn-primary" asp-controller="Fisherman" asp-action="Create">Hire new Fishermen</a>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone number</th>
+            <th>Hire Date</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var fisherman in Model){
+        <tr>
+            <td>@fisherman.FishermanID</td>
+            <td>@fisherman.Name</td>
+            <td>@fisherman.PhoneNumber</td>
+            <td>@fisherman.HireDate.ToString("MM/dd/yyyy")</td>
+            <td style="white-space:nowrap">
+                <a class="btn btn-primary btn-sm" asp-controller="Fisherman" asp-action="Edit"
+                    asp-route-id="@fisherman.FishermanID">Edit</a>
+                <a class="btn btn-primary btn-sm" asp-controller="Fisherman" asp-action="Delete"
+                    asp-route-id="@fisherman.FishermanID" onclick="retrun confirm('are you sure?')">Delete</a>
+            </td>
+
+        </tr>
+        }
+    </tbody>
+</table>

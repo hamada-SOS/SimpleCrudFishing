@@ -136,3 +136,4 @@
 /home/hamada/Documents/fishingCompany/fishingCompany/obj/Debug/net8.0/fishingCompany.csproj.CopyComplete
 /home/hamada/Documents/fishingCompany/fishingCompany/bin/Debug/net8.0/MySqlConnector.dll
 /home/hamada/Documents/fishingCompany/fishingCompany/bin/Debug/net8.0/Pomelo.EntityFrameworkCore.MySql.dll
+/home/hamada/Documents/fishingCompany/fishingCompany/obj/Debug/net8.0/fishingCompany.sourcelink.json
