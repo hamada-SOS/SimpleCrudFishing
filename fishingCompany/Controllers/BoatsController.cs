@@ -105,7 +105,7 @@ namespace fishingCompany.Controllers
                 }
                 catch (Microsoft.EntityFrameworkCore.DbUpdateException ex)
                 {
-                    TempData["Error"] = "Cannot d   elete the boat because it is referenced in other records.";
+                    TempData["Error"] = "Cannot delete the boat because it is referenced in other records.";
                     return RedirectToAction("Index", "Boats");
                 }
 
