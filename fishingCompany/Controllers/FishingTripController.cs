@@ -52,10 +52,16 @@ namespace fishingCompany.Controllers
         }
 
 
-        public IActionResult Edit()
-        {
-            return View();
-        }
+public IActionResult Edit(int id)
+{
+    var catchy = _context.fishingTrips.Find(id);
+    if (catchy == null)
+    {
+        return RedirectToAction("Index", "Catch");
+    }
+
+    return View(catchy);
+}
 
         [HttpPost]
         public IActionResult Edit(int id, FishingTrip fishingTrip)

@@ -1,24 +1,20 @@
 @model Boat
-@{
-    
-}
-
 
 <div class="row">
     <div class="col-md-8 mx-auto rounded border p-3">
-        <h2 class="text-center mb-5"> Edit Boat</h2>
+        <h2 class="text-center mb-5">Edit Boat</h2>
         <form method="post" enctype="multipart/form-data">
             <div class="row mb-3">
                 <label class="col-sm-4 col-form-label">Name</label>
                 <div class="col-sm-8">
-                    <input class="form-control" asp-for="Name">
+                    <input class="form-control" asp-for="Name" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-4 col-form-label">Capacity</label>
                 <div class="col-sm-8">
-                    <input class="form-control" asp-for="Capacity">
+                    <input class="form-control" asp-for="Capacity" />
                     <span asp-validation-for="Capacity" class="text-danger"></span>
                 </div>
             </div>
@@ -28,7 +24,7 @@
                     <select class="form-select" asp-for="Status">
                         <option value="Active">Active</option>
                         <option value="Inactive">Inactive</option>
-                        <option value="Under Maintaince">Under Maintaince</option>
+                        <option value="Under Maintenance">Under Maintenance</option>
                     </select>
                 </div>
             </div>
@@ -41,9 +37,7 @@
                         Cancel
                     </a>
                 </div>
-
             </div>
-
         </form>
     </div>
 </div>

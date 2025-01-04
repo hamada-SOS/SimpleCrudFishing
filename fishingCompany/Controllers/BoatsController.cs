@@ -55,41 +55,40 @@ namespace fishingCompany.Controllers
         }
 
 
-        public IActionResult Edit()
-        {
-            return View();
-        }
+        public IActionResult Edit(int id)
+{
+    var boat = _context.boats.Find(id); // Fetch the boat by ID
+    if (boat == null)
+    {
+        return RedirectToAction("Index", "Boats");
+    }
 
-        [HttpPost]
-        public IActionResult Edit(int id, Boat boat)
-        {
-            var boaty = _context.boats.Find(id);
-            if(boaty == null){
-                return RedirectToAction("Index", "Boats");
-            }
+    return View(boat); // Pass the boat object to the view
+}
 
-            if(!ModelState.IsValid)
-            {
-            ViewData["BoatID"] = boat.BoatID;
-            ViewData["Name"] = boat.Name;
-            ViewData["Capacity"] = boat.Capacity;
-            ViewData["Status"] = boat.Status;
+[HttpPost]
+public IActionResult Edit(int id, Boat boat)
+{
+    var boaty = _context.boats.Find(id); // Find the boat in the database
+    if (boaty == null)
+    {
+        return RedirectToAction("Index", "Boats");
+    }
 
-            return View(boat);
-            }
+    if (!ModelState.IsValid)
+    {
+        return View(boat); // Return the form with validation errors
+    }
 
-            boaty.Name = boat.Name;
-            boaty.Capacity = boat.Capacity;
-            boaty.Status = boat.Status;
-            
-            _context.SaveChanges(true);
+    // Update the boat properties
+    boaty.Name = boat.Name;
+    boaty.Capacity = boat.Capacity;
+    boaty.Status = boat.Status;
 
-            return RedirectToAction("Index", "Boats");
+    _context.SaveChanges(); // Save changes to the database
 
-
-            // ViewData["Created aT"] = boat.<CreatedAtAction.ToString("MM/dd/yyyy");
-
-        }
+    return RedirectToAction("Index", "Boats"); // Redirect to the index page
+}
 
         public IActionResult Delete(int id)
         {

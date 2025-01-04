@@ -49,11 +49,16 @@ namespace fishingCompany.Controllers
             return RedirectToAction("Index", "Fisherman");
         }
 
+public IActionResult Edit(int id)
+{
+    var catchy = _context.fishermen.Find(id);
+    if (catchy == null)
+    {
+        return RedirectToAction("Index", "Catch");
+    }
 
-        public IActionResult Edit()
-        {
-            return View();
-        }
+    return View(catchy);
+}
 
         [HttpPost]
         public IActionResult Edit(int id, Fisherman fisherman)

@@ -50,42 +50,38 @@ namespace fishingCompany.Controllers
             return RedirectToAction("Index", "Catch");
         }
 
+public IActionResult Edit(int id)
+{
+    var catchy = _context.catches.Find(id);
+    if (catchy == null)
+    {
+        return RedirectToAction("Index", "Catch");
+    }
 
-        public IActionResult Edit()
-        {
-            return View();
-        }
+    return View(catchy);
+}
 
-        [HttpPost]
-        public IActionResult Edit(int id, Catch catche)
-        {
-            var catchy = _context.catches.Find(id);
-            if(catchy == null){
-                return RedirectToAction("Index", "Catch");
-            }
+[HttpPost]
+public IActionResult Edit(int id, Catch catche)
+{
+    var catchy = _context.catches.Find(id);
+    if (catchy == null)
+    {
+        return RedirectToAction("Index", "Catch");
+    }
 
-            if(!ModelState.IsValid)
-            {
-            ViewData["TripID"] = catchy.TripID;
-            ViewData["FishType"] = catchy.FishType;
-            ViewData["Weight"] = catchy.Weight;
-            // ViewData["Status"] = boat.Status;
+    if (!ModelState.IsValid)
+    {
+        return View(catchy); // Return the model with validation errors
+    }
 
-            return View(catchy);
-            }
+    catchy.TripID = catche.TripID;
+    catchy.FishType = catche.FishType;
+    catchy.Weight = catche.Weight;
 
-            catchy.TripID = catche.TripID;
-            catchy.FishType = catche.FishType;
-            catchy.Weight = catche.Weight;
-            
-            _context.SaveChanges(true);
-
-            return RedirectToAction("Index", "Boats");
-
-
-            // ViewData["Created aT"] = boat.<CreatedAtAction.ToString("MM/dd/yyyy");
-
-        }
+    _context.SaveChanges();
+    return RedirectToAction("Index", "Catch");
+}
 
         public IActionResult Delete(int id)
         {
